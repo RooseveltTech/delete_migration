@@ -1,6 +1,6 @@
-# `migrations_delete`
+# `delete-migrations`
 
-The `migrations_delete` is a commandline app that deletes a single folder migrations or all directory migrations folder.
+The `delete-migrations` is a command-line app that deletes a single folder migrations or all directory migrations folder.
 
 # Installation
 ## Using Pip
