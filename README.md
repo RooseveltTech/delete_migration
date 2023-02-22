@@ -5,7 +5,7 @@ The `migrations_delete` is a commandline app that deletes a single folder migrat
 # Installation
 ## Using Pip
 ```bash
-  $ pip install delete_migration
+  $ pip install delete-migrations
 ```
 ## Accessing the package on command line
 - [x] create a file "find.py" on the root directory of your project
