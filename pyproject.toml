@@ -1,0 +1,22 @@
+[build-system]
+requires = ['setuptools>=42']
+build-backend = 'setuptools.build_meta'
+
+[project]
+name = "delete_migration_roosevelt"
+version = "1.0.2"
+authors = [
+  { name="Abandy Roosevelt", email="rooseveltabandy@gmail.com" },
+]
+description = "This package helps to delete all migrations folders in your project or single migrations folder in your project"
+readme = "README.md"
+requires-python = ">=3.6"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://www.github.com/RooseveltTech"
+"Bug Tracker" = "https://www.github.com/RooseveltTech"
