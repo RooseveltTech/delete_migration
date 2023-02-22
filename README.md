@@ -9,7 +9,7 @@ The `migrations_delete` is a commandline app that deletes a single folder migrat
 ```
 ## Accessing the package on command line
 - [x] create a file "find.py" on the root directory of your project
-- [x] import the commandline app in the "find.py" file
+- [x] to import the command-line app in the "find.py" file
     ```bash
     $ from delete_migration_roosevelt import management
     ```
