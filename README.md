@@ -35,7 +35,7 @@ $ python find.py --delete all
 ```
 `search and delete folders migrations abbreviated`
 ```bash
-$ python find.py -D all
+$ python find.py -d all
 ```
 ## all single folder
 `search and delete single folder migrations`
@@ -44,7 +44,7 @@ $ python find.py --delete <name-of-folder>
 ```
 `search and delete single folder migrations abbreviated`
 ```bash
-$ python find.py -D <name-of-folder>
+$ python find.py -d <name-of-folder>
 ```
 ## all single folder
 `get the current version of the commandline library`
@@ -53,5 +53,5 @@ $ python find.py --version
 ```
 `get the current version of the commandline library abbreviated`
 ```bash
-$ python find.py -V
+$ python find.py -v
 ```
