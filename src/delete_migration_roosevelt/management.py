@@ -83,7 +83,7 @@ def delete_all(delete):
 
 
 global_parser = argparse.ArgumentParser(
-    prog="delete-migrations",
+    prog="delete_migration",
     description="delete migrations folder",
     epilog="Thanks for using %(prog)s! :)"
 )
@@ -105,7 +105,7 @@ global_parser.add_argument(
     "-v",
     "--version",
     action="version",
-    version="%(prog)s 1.0.1"
+    version="%(prog)s 1.0.2"
 )
 args = global_parser.parse_args()
 
