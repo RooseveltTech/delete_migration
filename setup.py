@@ -1,3 +1,4 @@
+""" This is the setup tool file """
 import setuptools
 
 with open("README.md", "r", encoding = "utf-8") as fh:
@@ -6,10 +7,10 @@ with open("README.md", "r", encoding = "utf-8") as fh:
 setuptools.setup(
     name = "delete-migrations",
     version = "1.0.2",
-    
     author = "Abandy Roosevelt",
     author_email = "rooseveltabandy@gmail.com",
-    description = "This is a command-line app that deletes a single folder migrations or all directory migrations folder",
+    description = "This is a command-line app that deletes a single folder migrations or" \
+    " all directory migrations folder",
     long_description = long_description,
     long_description_content_type = "text/markdown",
     url = "https://github.com/RooseveltTech/delete_migration",
