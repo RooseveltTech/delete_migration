@@ -1,8 +1,10 @@
-# `delete-migrations`
+📦 delete-migrations
+=======================
 
 The `delete-migrations` is a command-line app that deletes a single folder migrations or all directory migrations folder.
 
 # Installation
+You can install nigeria_banks from [PyPI](https://pypi.org/project/delete-migrations/):
 
 ## Create a virtual environment in root folder
 `for mac, linux os`
