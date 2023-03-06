@@ -1,6 +1,6 @@
+""" This is a delete migration management file """
 import argparse
 import datetime
-from pathlib import Path
 import os
 import shutil
 from datetime import datetime
@@ -9,9 +9,12 @@ from datetime import datetime
 ROOT_DIR = os.path.abspath(os.curdir)
 
 # get all system folders that
-system_file = ["bin", "include", "site-packages","lib", "lib64", "Scripts", "Lib", "Include", "venv" ,"env", ".env", ".venv"]
+system_file = ["bin", "include", "site-packages","lib", "lib64", "Scripts",
+               "Lib", "Include", "venv" ,"env", ".env", ".venv"]
+
 
 def get_directories(path):
+    """ This function gets all directories that exists in the path """
     folders = []
 
     while True:
@@ -27,18 +30,23 @@ def get_directories(path):
     return folders
 
 # delete all migration folders excluding system folders
-def delete_migration(delete):
+def delete_migration():
+    """ 
+        This function deletes all migration folders
+        in the root folder
+    """
     start_time = datetime.now()
     app_path=ROOT_DIR
     folder_name = 'migrations'
     count = {"number": 0}
     for root, dirs, file in os.walk(app_path):
+        del file
         # check if migration folder exists
         if folder_name in dirs:
             my_path = os.path.abspath(os.path.join(root, folder_name))
             get_all_dir = get_directories(my_path)
             this_count = 0
-            # check if path belongs to system folder 
+            # check if path belongs to system folder
             for system in system_file:
                 if system in get_all_dir:
                     this_count += 1
@@ -66,17 +74,22 @@ def delete_migration(delete):
 
 # delete single directory migration folder
 def delete_single_migration(delete):
+    """ 
+        This function deletes all migration folders
+        in a single folder
+    """
     start_time = datetime.now()
     app_path=os.path.abspath(os.path.join(ROOT_DIR, delete))
     folder_name = 'migrations'
     count = {"number": 0}
     for root, dirs, file in os.walk(app_path):
+        del file
         # check if migration folder exists
         if folder_name in dirs:
             my_path = os.path.abspath(os.path.join(root, folder_name))
             get_all_dir = get_directories(my_path)
             this_count = 0
-            # check if path belongs to system folder 
+            # check if path belongs to system folder
             for system in system_file:
                 if system in get_all_dir:
                     this_count += 1
@@ -90,7 +103,7 @@ def delete_single_migration(delete):
             else:
                 pass
         else:
-            pass    
+            pass
     if count["number"] == 0:
         msg = False
     elif count["number"] > 0:
@@ -101,25 +114,45 @@ def delete_single_migration(delete):
     task_time = stop_time - start_time
     print("done: ",task_time)
     return msg
-    
+
+def all_message(value):
+    """ 
+        This function prints the output message
+        when deleting all migration folder(s)
+    """
+    if value is True:
+        message = "all migration folders deleted"
+        output_msg = str(global_parser.exit(1, message=message))
+    else:
+        message = "no migration folder found"
+        output_msg = str(global_parser.error(message=message))
+    return output_msg
+
+def single_message(value):
+    """ 
+        This function prints the output message
+        when deleting a single migration folder(s)
+    """
+    if value is True:
+        message = "single migration folder deleted"
+        output_msg = str(global_parser.exit(1, message=message))
+    else:
+        message = "no migration folder found"
+        output_msg = str(global_parser.error(message=message))
+    return output_msg
+
 def delete_all(delete):
+    """ 
+        This function takes care of what to do
+        when deleting migration folder(s)
+    """
     if delete == "all":
-        del_all = delete_migration(delete)
-        if del_all is True:
-            message = "all migration folders deleted"
-            output_msg = global_parser.exit(1, message=message)
-        else:
-            message = "no migration folder found" 
-            output_msg = global_parser.error(message=message)
+        del_all = delete_migration()
+        message = all_message(del_all)
     else:
         del_all = delete_single_migration(delete)
-        if del_all is True:
-            message = "single migration folder deleted"
-            output_msg = global_parser.exit(1, message=message)
-        else:
-            message = "no migration folder found" 
-            output_msg = global_parser.error(message=message)
-    return output_msg
+        message = single_message(del_all)
+    return message
 
 
 global_parser = argparse.ArgumentParser(
@@ -130,32 +163,43 @@ global_parser = argparse.ArgumentParser(
 )
 
 # global_parser.add_argument('arg', help='required when using [-d] or [--delete]')
-subparsers = global_parser.add_subparsers(title='subcommands',
-                                   description='valid subcommands',
-                                   help='required when using [-d] or [--delete]')
-subparsers.add_parser("all", help="delete migrations folder(s) from all directories", usage="[-d all]") 
-subparsers.add_parser("dir_name", help="delete migrations folder(s) from the single <dir_name>", usage="[-d <dir_name>]")
+subparsers = global_parser.add_subparsers(
+                                            title='subcommands',
+                                            description='valid subcommands',
+                                            help='required when using [-d] or [--delete]'
+                                        )
+subparsers.add_parser(
+                        "all", 
+                        help="delete migrations folder(s) from all directories",
+                        usage="[-d all]"
+                    )
+subparsers.add_parser(
+                        "dir_name", 
+                        help="delete migrations folder(s) from the single <dir_name>",
+                        usage="[-d <dir_name>]"
+                    )
 global_parser.add_argument(
-    "-d",
-    "--delete",
-    type=str,
-    nargs=1,
-    default="all",
-    help="argument can be [all] or [dir_name]",
-)
+                            "-d",
+                            "--delete",
+                            type=str,
+                            nargs=1,
+                            default="all",
+                            help="argument can be [all] or [dir_name]",
+                        )
 global_parser.set_defaults(func=delete_all)
 
 
 
 global_parser.add_argument(
-    "-v",
-    "--version",
-    action="version",
-    version="%(prog)s 1.0.2"
-)
+                            "-v",
+                            "--version",
+                            action="version",
+                            version="%(prog)s 1.0.2"
+                        )
 args = global_parser.parse_args()
 
 try:
     print(args.func(*args.delete))
 except TypeError:
     global_parser.print_help()
+    
